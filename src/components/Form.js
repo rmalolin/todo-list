@@ -1,15 +1,25 @@
 import { useState, useContext } from "react";
 import { AlertContext } from "../context/alert/alertContext";
+import { FirebaseContext } from "../context/firebase/firebaseContext";
 
 export const Form = () => {
   const [value, setValue] = useState("");
   const alert = useContext(AlertContext);
+  const firebase = useContext(FirebaseContext);
 
-  const submitHundler = (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
 
     if (value.trim()) {
-      alert.show("Заметка была создана", "success");
+      firebase
+        .addNote(value.trim())
+        .then(() => {
+          alert.show("Заметка была создана", "success");
+        })
+        .catch(() => {
+          alert.show("Что-то пошло не так...", "danger");
+        });
+
       setValue("");
     } else {
       alert.show("Введите заметку");
@@ -19,7 +29,7 @@ export const Form = () => {
   };
 
   return (
-    <form onSubmit={submitHundler}>
+    <form onSubmit={submitHandler}>
       <div className="form-group">
         <input
           type="text"
