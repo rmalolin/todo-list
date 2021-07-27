@@ -17,15 +17,12 @@ export const Form = () => {
           alert.show("Заметка была создана", "success");
         })
         .catch(() => {
-          alert.show("Что-то пошло не так...", "danger");
+          alert.show("Что-то пошло не так", "danger");
         });
-
       setValue("");
     } else {
       alert.show("Введите заметку");
     }
-
-    alert.show(value, "success");
   };
 
   return (
@@ -34,7 +31,7 @@ export const Form = () => {
         <input
           type="text"
           className="form-control"
-          placeholder="Введите заметку"
+          placeholder="Введите название заметки"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
