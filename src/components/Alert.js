@@ -24,7 +24,7 @@ export const Alert = () => {
         <button
           onClick={hide}
           type="button"
-          className="close"
+          className="btn btn-outline-dark btn-sm m-1"
           aria-label="Close"
         >
           <span aria-hidden="true">&times;</span>
